@@ -1,0 +1,239 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+.screen {
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.test-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    min-height: 60vh;
+}
+
+.color-word {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 5px;
+}
+
+.color-block {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+}
+
+.control-panel {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.timer {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+    color: #e74c3c;
+}
+
+#results-container {
+    margin-top: 20px;
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+#results-table th, #results-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#results-table th {
+    background-color: #f2f2f2;
+}
+
+.interpretation {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border-left: 5px solid #3498db;
+}
+
+/* Colors for the test */
+.red { color: red; }
+.blue { color: blue; }
+.green { color: green; }
+.yellow { color: gold; }
+.purple { color: purple; }
+
+/* Black text for word reading */
+.black { color: black; }
+
+/* Microphone related styles */
+.mic-permission-box {
+    background-color: #f0f8ff;
+    border: 1px solid #d1e8ff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.mic-status {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.mic-status.active {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.mic-status.inactive {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+#mic-icon, #word-reading-mic-icon, #color-naming-mic-icon, #incongruent-mic-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.mic-calibration {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.calibration-feedback {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 60px;
+    margin: 10px 0;
+}
+
+.recognition-feedback {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.mic-reminder {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0 10px 0;
+}
+
+.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.secondary-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.secondary-button:hover {
+    background-color: #5a6268;
+}
+
+.secondary-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Animation for active microphone */
+@keyframes micPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.mic-active {
+    animation: micPulse 1.5s infinite;
+    color: #28a745;
+}
+
+.mic-inactive {
+    color: #dc3545;
+}
+
+.mic-pending {
+    color: #ffc107;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="intro-screen" class="screen">
+            <h1>Stroop Test</h1>
+            <p>This test measures selective attention, cognitive inhibition, and processing speed.</p>
+            <p>The test consists of three parts:</p>
+            <ol>
+                <li><strong>Word Reading:</strong> Read the color words aloud as quickly as possible.</li>
+                <li><strong>Color Naming:</strong> Name the colors of the blocks as quickly as possible.</li>
+                <li><strong>Color-Word Naming:</strong> Name the INK COLOR of each word (ignore what the word says).</li>
+            </ol>
+            <div class="mic-permission-box">
+                <p><strong>This test requires microphone access to measure your spoken responses.</strong></p>
+                <p>Your voice will be processed locally and not stored or transmitted.</p>
+                <button id="mic-permission-btn" class="secondary-button">Check Microphone Access</button>
+                <div id="mic-status" class="mic-status">
+                    <span id="mic-icon">🎤</span>
+                    <span id="mic-status-text">Microphone status unknown</span>
+                </div>
+            </div>
+            <div id="browser-warning" class="warning hidden">
+                <p>⚠️ Speech recognition works best in Chrome, Edge, or Safari browsers. Your browser may have limited support.</p>
+            </div>
+            <button id="start-test">Begin Test</button>
+        </div>
+
+        <div id="word-reading-instructions" class="screen hidden">
+            <h2>Part 1: Word Reading</h2>
+            <p>In this part, you will see color words printed in black.</p>
+            <p>Your task is to READ THE WORDS aloud as quickly and accurately as possible.</p>
+            <p>Press the spacebar to start timing and again to stop when you've finished.</p>
+            <div class="mic-calibration">
+                <p>Before starting, let's make sure your microphone is working:</p>
+                <p>Say each of these colors aloud: "RED, BLUE, GREEN, YELLOW, PURPLE"</p>
+                <div id="calibration-feedback" class="calibration-feedback">
+                    <p>Recognized: <span id="calibration-recognized">None yet</span></p>
+                </div>
+                <button id="complete-calibration" class="secondary-button" disabled>Continue</button>
+            </div>
+            <button id="start-word-reading">Start</button>
+        </div>
+
+        <div id="word-reading-test" class="screen hidden">
+            <div id="word-reading-container" class="test-container"></div>
+            <div class="control-panel">
+                <p>Press SPACEBAR to start timing, then again when you finish reading all words.</p>
+                <span id="word-reading-timer" class="timer">00:00:00</span>
+                <div class="mic-status">
+                    <span id="word-reading-mic-icon">🎤</span>
+                    <span id="word-reading-mic-status">Microphone ready</span>
+                </div>
+                <div class="recognition-feedback">
+                    <p>Last recognized: <span id="word-reading-recognized">None</span></p>
+                    <p>Accuracy: <span id="word-reading-accuracy">0%</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="color-naming-instructions" class="screen hidden">
+            <h2>Part 2: Color Naming</h2>
+            <p>In this part, you will see colored blocks.</p>
+            <p>Your task is to NAME THE COLORS aloud as quickly and accurately as possible.</p>
+            <p>Press the spacebar to start timing and again to stop when you've finished.</p>
+            <div class="mic-reminder">
+                <p>Remember to speak clearly and name each color as you see it.</p>
+            </div>
+            <button id="start-color-naming">Start</button>
+        </div>
+
+        <div id="color-naming-test" class="screen hidden">
+            <div id="color-naming-container" class="test-container"></div>
+            <div class="control-panel">
+                <p>Press SPACEBAR to start timing, then again when you finish naming all colors.</p>
+                <span id="color-naming-timer" class="timer">00:00:00</span>
+                <div class="mic-status">
+                    <span id="color-naming-mic-icon">🎤</span>
+                    <span id="color-naming-mic-status">Microphone ready</span>
+                </div>
+                <div class="recognition-feedback">
+                    <p>Last recognized: <span id="color-naming-recognized">None</span></p>
+                    <p>Accuracy: <span id="color-naming-accuracy">0%</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="incongruent-instructions" class="screen hidden">
+            <h2>Part 3: Color-Word Naming</h2>
+            <p>In this part, you will see color words printed in different color ink.</p>
+            <p>Your task is to NAME THE INK COLOR (not read the word) as quickly and accurately as possible.</p>
+            <p>This is the most challenging part. Stay focused on the color, not the word.</p>
+            <p>Press the spacebar to start timing and again to stop when you've finished.</p>
+            <div class="mic-reminder">
+                <p>Remember to speak clearly and name only the INK COLOR, not the word itself.</p>
+            </div>
+            <button id="start-incongruent">Start</button>
+        </div>
+
+        <div id="incongruent-test" class="screen hidden">
+            <div id="incongruent-container" class="test-container"></div>
+            <div class="control-panel">
+                <p>Press SPACEBAR to start timing, then again when you finish naming all colors.</p>
+                <span id="incongruent-timer" class="timer">00:00:00</span>
+                <div class="mic-status">
+                    <span id="incongruent-mic-icon">🎤</span>
+                    <span id="incongruent-mic-status">Microphone ready</span>
+                </div>
+                <div class="recognition-feedback">
+                    <p>Last recognized: <span id="incongruent-recognized">None</span></p>
+                    <p>Accuracy: <span id="incongruent-accuracy">0%</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <h2>Test Results</h2>
+            <div id="results-container">
+                <table id="results-table">
+                    <tr>
+                        <th>Test Condition</th>
+                        <th>Completion Time</th>
+                        <th>Speech Accuracy</th>
+                    </tr>
+                    <tr>
+                        <td>Word Reading</td>
+                        <td id="word-reading-time">-</td>
+                        <td id="word-reading-result-accuracy">-</td>
+                    </tr>
+                    <tr>
+                        <td>Color Naming</td>
+                        <td id="color-naming-time">-</td>
+                        <td id="color-naming-result-accuracy">-</td>
+                    </tr>
+                    <tr>
+                        <td>Incongruent Color-Word Naming</td>
+                        <td id="incongruent-time">-</td>
+                        <td id="incongruent-result-accuracy">-</td>
+                    </tr>
+                </table>
+
+                <h3>Interference Scores</h3>
+                <p><strong>Difference Score:</strong> <span id="difference-score">-</span> seconds</p>
+                <p><strong>Ratio Score:</strong> <span id="ratio-score">-</span></p>
+                
+                <div class="interpretation">
+                    <h3>Interpretation</h3>
+                    <p id="interpretation-text"></p>
+                    <p id="accuracy-interpretation"></p>
+                </div>
+
+                <button id="restart-test">Restart Test</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
